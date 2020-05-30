@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class paralax : MonoBehaviour
 {
-    private float length, startPx,startPy;
+    private float length,startPy;
 
     public GameObject cam;
 
@@ -12,14 +12,12 @@ public class paralax : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPx = transform.position.x;
         startPy = transform.position.y;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float distx = (cam.transform.position.x * paral);
         float disty = (cam.transform.position.y * paral);
         
         transform.position =new Vector3(transform.position.x,startPy + disty,transform.position.z);
