@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -8365286357437233689
     second: models_a_lot_of_3
+  - first:
+      213: 2582468522102316327
+    second: models_a_lot_of_4
+  - first:
+      213: 263691458842030398
+    second: models_a_lot_of_5
+  - first:
+      213: 7813963271234346591
+    second: models_a_lot_of_6
+  - first:
+      213: 8616573335974589144
+    second: models_a_lot_of_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -131,7 +143,7 @@ TextureImporter:
         width: 12
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +164,7 @@ TextureImporter:
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +185,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +206,7 @@ TextureImporter:
         width: 20
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,6 +214,90 @@ TextureImporter:
       bones: []
       spriteID: 7e5488c016888eb80800000000000000
       internalID: -8365286357437233689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: models_a_lot_of_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 62
+        width: 1
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d59873075c6d320800000000000000
+      internalID: 2582468522102316327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: models_a_lot_of_5
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 57
+        width: 1
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3175961cf1d8a300800000000000000
+      internalID: 263691458842030398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: models_a_lot_of_6
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 61
+        width: 1
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e5fdde136c07c60800000000000000
+      internalID: 7813963271234346591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: models_a_lot_of_7
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 56
+        width: 1
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d23ed7ebc7349770800000000000000
+      internalID: 8616573335974589144
       vertices: []
       indices: 
       edges: []

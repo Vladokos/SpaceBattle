@@ -77,7 +77,7 @@ public class EnemyLife : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
         Destroy(gameObject);
     }
-    //Вермя через которое может выстрелить враг(не работает надо исправить)
+    //Вермя через которое может выстрелить враг
     void Shoot()
     {
         if (timeShoot <= 0 && pC._gameOver == false)
@@ -88,14 +88,6 @@ public class EnemyLife : MonoBehaviour
         if (timeShoot > 0)
         {
             timeShoot -= Time.deltaTime;
-        }
-    }
-// Если выйдет из бэкграунда удалиться 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("BackGround"))
-        {
-            StartCoroutine(DestroyEnemy());
         }
     }
 }

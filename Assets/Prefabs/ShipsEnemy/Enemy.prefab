@@ -230,7 +230,7 @@ MonoBehaviour:
   bc2: {fileID: 4557567344074575289}
   rB2D: {fileID: 7149654795117212604}
   firstFire: 1
-  enemyBullet: {fileID: 5756145072580935831, guid: 41708bb500fbcab40a72ac22373d8839,
+  enemyBullet: {fileID: 4307458746184342361, guid: 4e54bd5a0b85e4c49b611c889a9736e5,
     type: 3}
   timeShoot: 0
   coolDownd: 4

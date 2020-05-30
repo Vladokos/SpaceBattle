@@ -80,12 +80,4 @@ public class EnemyDestrroyer : MonoBehaviour
             fireEngine.SetBool("move",true);
         }
     }
-    // Если выйдет из бэкграунда удалиться 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("BackGround"))
-        {
-            StartCoroutine(DestroyEnemy());
-        }
-    }
 }

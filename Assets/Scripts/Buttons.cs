@@ -19,10 +19,6 @@ public class Buttons : MonoBehaviour
     {
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
     }
-    void Update()
-    {
-        
-    }
 
     public  void PauseButton()
     {
