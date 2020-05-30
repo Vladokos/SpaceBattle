@@ -11,13 +11,15 @@ public class EnemyDestrroyer : MonoBehaviour
     
     public BoxCollider2D bC;
     public Rigidbody2D rB2D;
-    public Animator enemyAnimator;
+    public Animator enemyAnimator,fireEngine;
      
     private GameObject player;
     private PlayerControllers pC;
     private Vector3 playerPos;
 
     private Vector3 enemyPos;
+
+    public GameObject _fireEngine;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,20 +37,25 @@ public class EnemyDestrroyer : MonoBehaviour
     {
         Charge();
     }
-    //Если дотронулся пуля игрока то отнимается жизнь
+    //Если дотронулся пуля игрока то отнимается жизнь || eсли дотрагивается до игрока то вызрывается 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("LaserBullet"))
         {
             Dm(1);
             Destroy(collision.gameObject);
-            if(enemyHp < 1)
+            if(enemyHp < 1 )
             {
                 enemyAnimator.SetBool("ded", true);
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 StartCoroutine(DestroyEnemy());
             }
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(DestroyEnemy());
+            enemyAnimator.SetBool("ded", true);
         }
     }
     //Уменьшение здоровья 
@@ -69,16 +76,9 @@ public class EnemyDestrroyer : MonoBehaviour
         {
             Vector3 charge = (playerPos - enemyPos).normalized;
             rB2D.AddForce(charge * speed);
+            _fireEngine.gameObject.SetActive(true);
+            fireEngine.SetBool("move",true);
         }
-    }
-    // Если дотрагивается до игрока то вызрывается 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                StartCoroutine(DestroyEnemy());
-                enemyAnimator.SetBool("ded", true);
-            }
     }
     // Если выйдет из бэкграунда удалиться 
     private void OnTriggerExit2D(Collider2D other)
