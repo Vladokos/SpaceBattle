@@ -22,7 +22,7 @@ public class MainCamer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, Time.fixedDeltaTime * 1f);
+        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, Time.fixedDeltaTime * 0.5f);
 
         if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
         {
