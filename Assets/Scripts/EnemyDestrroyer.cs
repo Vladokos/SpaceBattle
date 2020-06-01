@@ -15,9 +15,6 @@ public class EnemyDestrroyer : MonoBehaviour
      
     private GameObject player;
     private PlayerControllers pC;
-    private Vector3 playerPos;
-
-    private Vector3 enemyPos;
 
     public GameObject _fireEngine;
     
@@ -29,8 +26,6 @@ public class EnemyDestrroyer : MonoBehaviour
         
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         player = GameObject.Find("Player");
-        playerPos = pC.transform.position;
-        enemyPos = transform.position;
     }
 
     // Update is called once per frame
@@ -56,12 +51,18 @@ public class EnemyDestrroyer : MonoBehaviour
                 speed = 0;
             }
         }
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") )
         {
             StartCoroutine(DestroyEnemy());
             explosion.gameObject.SetActive(true);
             explosion.Play();
         }
+
+        if (collision.gameObject.CompareTag("DetectColl"))
+        {
+            Destroy(gameObject);
+        }
+
     }
     //Уменьшение здоровья 
     void Dm(int dm)
@@ -79,7 +80,7 @@ public class EnemyDestrroyer : MonoBehaviour
     {
         if (player != null && hp == 1)
         {
-            Vector3 charge = (playerPos - enemyPos).normalized;
+            Vector3 charge = (player.transform.position - transform.position).normalized;
             rB2D.AddForce(charge * speed);
             _fireEngine.gameObject.SetActive(true);
             fireEngine.SetBool("move",true);

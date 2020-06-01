@@ -65,7 +65,8 @@ public class PlayerControllers : MonoBehaviour
         {
             speedY = verInput * Time.deltaTime ;
             fireEngine.SetActive(true);
-            fireAnim.SetBool("ArrowcClick", true);   
+            fireAnim.SetBool("ArrowcClick", true);
+            rb2d.drag = 0f;
         }
     }
     //Кнопка вниз
@@ -75,7 +76,8 @@ public class PlayerControllers : MonoBehaviour
         {
             speedY = -verInput * Time.deltaTime;
             fireEngine.SetActive(true);
-            fireAnim.SetBool("ArrowcClick", true);   
+            fireAnim.SetBool("ArrowcClick", true); 
+            rb2d.drag = 0f;
         }
     }
     //Кнопка влево
@@ -86,6 +88,7 @@ public class PlayerControllers : MonoBehaviour
             speedX = -horInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);   
+            rb2d.drag = 0f;
         }
     }
     //Кнопка впрво
@@ -96,6 +99,7 @@ public class PlayerControllers : MonoBehaviour
             speedX = horInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);   
+            rb2d.drag = 0f;
         }
     }
     // кнопка выстрела
@@ -116,6 +120,7 @@ public class PlayerControllers : MonoBehaviour
         speedY = 0;
         fireAnim.SetBool("ArrowcClick", false);
         fireEngine.SetActive(false);
+        rb2d.drag = 5f;
     }
     
     //Если умирает враг +1 очко
