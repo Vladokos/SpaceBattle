@@ -14,7 +14,8 @@ public class Buttons : MonoBehaviour
 
     public RawImage pauseImage;
 
-    public AudioSource _AudioSource;
+    public  AudioSource  _AudioSource;
+    
     void Start()
     {
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
@@ -50,6 +51,7 @@ public class Buttons : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
         DontDestroyOnLoad(_AudioSource);
+
     }
 
     public void Settings()

@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 819276690}
-  paral: 0.4
+  paral: 0.1
 --- !u!212 &174226528
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1068,6 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1196731797}
   - component: {fileID: 1196731796}
+  - component: {fileID: 1196731798}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: UP
@@ -1185,6 +1186,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1196731798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196731795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589db958a32700a4cb8d543acaf2d9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1201507658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,7 +1455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 819276690}
-  paral: 0
+  paral: 0.9
 --- !u!212 &1492685748
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1611,7 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 819276690}
-  paral: 1
+  paral: 0
 --- !u!212 &1564853249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1707,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 819276690}
-  paral: 0.9
+  paral: 0.4
 --- !u!212 &1611708292
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1958,7 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 819276690}
-  paral: 0.6
+  paral: 0.2
 --- !u!212 &1909553658
 SpriteRenderer:
   m_ObjectHideFlags: 0
