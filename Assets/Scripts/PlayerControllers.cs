@@ -23,7 +23,7 @@ public class PlayerControllers : MonoBehaviour
     public GameObject fireEngine;
     private Vector3 bulletVector;
 
-    public Animator fireAnim,gameOver;
+    public Animator fireAnim;
 
     public TextMeshProUGUI scoreT;
     private int score;
@@ -40,6 +40,8 @@ public class PlayerControllers : MonoBehaviour
 
     public float timeShoot,coolDownd;
     public bool _gameOver = false;
+    
+    public ParticleSystem explosion;
     void Start()
     {
         playerHp = hp;
@@ -141,7 +143,8 @@ public class PlayerControllers : MonoBehaviour
         {
             _gameOver = true;
             StartCoroutine(Destroy());
-            gameOver.SetBool("GameOver",true);
+            explosion.gameObject.SetActive(true);
+            explosion.Play();
             boom.Play();
             restartButton.gameObject.SetActive(true);
         }
@@ -149,7 +152,8 @@ public class PlayerControllers : MonoBehaviour
         {
             restartButton.gameObject.SetActive(true);
             StartCoroutine(Destroy());
-            gameOver.SetBool("GameOver",true);
+            explosion.gameObject.SetActive(true);
+            explosion.Play();
             boom.Play();
         }
     }
@@ -161,7 +165,7 @@ public class PlayerControllers : MonoBehaviour
 //Уничтожение через определнный промежуток времени
     IEnumerator Destroy()
     { 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 //прочитай название

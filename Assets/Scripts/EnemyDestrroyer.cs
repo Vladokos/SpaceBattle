@@ -11,7 +11,7 @@ public class EnemyDestrroyer : MonoBehaviour
     
     public BoxCollider2D bC;
     public Rigidbody2D rB2D;
-    public Animator enemyAnimator,fireEngine;
+    public Animator fireEngine;
      
     private GameObject player;
     private PlayerControllers pC;
@@ -20,6 +20,8 @@ public class EnemyDestrroyer : MonoBehaviour
     private Vector3 enemyPos;
 
     public GameObject _fireEngine;
+    
+    public ParticleSystem explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,6 @@ public class EnemyDestrroyer : MonoBehaviour
         
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         player = GameObject.Find("Player");
-
         playerPos = pC.transform.position;
         enemyPos = transform.position;
     }
@@ -46,16 +47,20 @@ public class EnemyDestrroyer : MonoBehaviour
             Destroy(collision.gameObject);
             if(enemyHp < 1 )
             {
-                enemyAnimator.SetBool("ded", true);
+                /*enemyAnimator.SetBool("ded", true);*/
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 StartCoroutine(DestroyEnemy());
+                explosion.gameObject.SetActive(true);
+                explosion.Play();
+                speed = 0;
             }
         }
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(DestroyEnemy());
-            enemyAnimator.SetBool("ded", true);
+            explosion.gameObject.SetActive(true);
+            explosion.Play();
         }
     }
     //Уменьшение здоровья 
@@ -63,16 +68,16 @@ public class EnemyDestrroyer : MonoBehaviour
     {
         enemyHp -= dm;
     }
-    //Уничтожение через 1.3 сек чтобы успела анимация проиграться
+    //Уничтожение через неск. сек. чтобы успела анимация проиграться
     IEnumerator DestroyEnemy()
     { 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
     //Если есть игрок на сцене то летит на него
     void Charge()
     {
-        if (player != null)
+        if (player != null && hp == 1)
         {
             Vector3 charge = (playerPos - enemyPos).normalized;
             rB2D.AddForce(charge * speed);

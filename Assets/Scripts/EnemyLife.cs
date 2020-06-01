@@ -9,23 +9,16 @@ public class EnemyLife : MonoBehaviour
     public int hp;
     public int enemyHp;
 
-    public Animator enemyAnimator;
-    public bool explosinBool = false;
-
     public BoxCollider2D bC,bc2;
     public Rigidbody2D rB2D;
 
     private PlayerControllers pC;
-    private SpawnManager sM;
-
-    private GameObject player;
-
-    private float fire = 4f;
-    public float firstFire = 1.0f;
-
+    
     public GameObject enemyBullet;
     
     public float timeShoot,coolDownd;
+    
+    public ParticleSystem explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +26,7 @@ public class EnemyLife : MonoBehaviour
         
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         bC = GetComponent<BoxCollider2D>();
-        sM = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         rB2D = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -54,10 +45,10 @@ public class EnemyLife : MonoBehaviour
             {
                 StartCoroutine(DestroyEnemy());
                 pC.enemyDestroy = true;
-                explosinBool = true;
-                enemyAnimator.SetBool("1", true);
                 bC.enabled = false;
                 bc2.enabled = false;
+                explosion.gameObject.SetActive(true);
+                explosion.Play();
             }
         }
         //Если дотрагивается игрок то физика будет Kinematic чтоб игрок не мог толкать врага
@@ -71,10 +62,10 @@ public class EnemyLife : MonoBehaviour
     {
         enemyHp -= dm;
     }
-    //Уничтожение через 1.3 сек чтобы успела анимация проиграться
+    //Уничтожение через неск. сек. чтобы успела анимация проиграться
     IEnumerator DestroyEnemy()
     {
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
     //Вермя через которое может выстрелить враг
