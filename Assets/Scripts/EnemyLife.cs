@@ -18,7 +18,9 @@ public class EnemyLife : MonoBehaviour
     
     public float timeShoot,coolDownd;
     
-    public ParticleSystem explosion;
+    private GameObject explosion;
+
+    private Vector3 _position;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,9 @@ public class EnemyLife : MonoBehaviour
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         bC = GetComponent<BoxCollider2D>();
         rB2D = GetComponent<Rigidbody2D>();
+        
+        _position = new Vector3(transform.position.x,transform.position.y,-38f);
+        explosion = GameObject.Find("Explosion");
     }
 
     // Update is called once per frame
@@ -47,8 +52,7 @@ public class EnemyLife : MonoBehaviour
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 bc2.enabled = false;
-                explosion.gameObject.SetActive(true);
-                explosion.Play();
+                Instantiate(explosion,_position, Quaternion.identity);
             }
         }
         //Если дотрагивается игрок то физика будет Kinematic чтоб игрок не мог толкать врага

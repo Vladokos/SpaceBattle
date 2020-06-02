@@ -26,7 +26,7 @@ public class PlayerControllers : MonoBehaviour
     public Animator fireAnim;
 
     public TextMeshProUGUI scoreT;
-    private int score;
+    public int score;
 
     public bool enemyDestroy = false;
 
