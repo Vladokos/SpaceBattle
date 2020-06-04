@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameStart = true;
-        Invoke("SpawnShip", 3f);
+        InvokeRepeating("SpawnShip",3f,3f);
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
     }
     //Спавн рандомных врагов  каждые 3 секунды в рандомном полезрения камеры
@@ -29,7 +29,6 @@ public class SpawnManager : MonoBehaviour
             int randomShip = Random.Range(0, enemesPref.Count);
             Vector2 randomSpawn = new Vector2 (Random.Range(-spawnPosX, spawnPosX), Random.Range(spawnPosY, spawnPosY + 7f));
             Instantiate(enemesPref[randomShip], randomSpawn,Quaternion.identity);
-            Invoke("SpawnShip", 3f);
         }
     }
     // выполняет перезагрузку сцены

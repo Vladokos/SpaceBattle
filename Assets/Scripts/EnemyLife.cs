@@ -80,7 +80,7 @@ public class EnemyLife : MonoBehaviour
             timeShoot = coolDownd;
             Instantiate(enemyBullet, transform.position,Quaternion.identity);
         }
-        if (timeShoot > 0)
+        if (timeShoot > 0 && pC._gameOver == false)
         {
             timeShoot -= Time.deltaTime;
         }
