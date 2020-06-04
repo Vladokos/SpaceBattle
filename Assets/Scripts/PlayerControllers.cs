@@ -53,10 +53,14 @@ public class PlayerControllers : MonoBehaviour
         UpdateScore();
         InvisibleWall();
         Reload();
-        Vector2 asd = new Vector2(speedX, speedY);
-        /*rb2d.velocity = new Vector2(speedX * horInput * Time.fixedDeltaTime, speedY * verInput * Time.fixedDeltaTime).normalized;*/
-        rb2d.AddForce(asd.normalized * horInput * Time.fixedDeltaTime);
+        MovePlayer();
         bulletVector = new Vector3(transform.position.x -0.055f, transform.position.y + 1f, transform.position.z);
+    }
+    //Движение игрока
+    void MovePlayer()
+    {
+        Vector2 asd = new Vector2(speedX, speedY);
+        rb2d.AddForce(asd.normalized * horInput * Time.fixedDeltaTime);
     }
     //Кнопка вверх
     public void UpArrow()

@@ -42,7 +42,6 @@ public class EnemyDestrroyer : MonoBehaviour
             Destroy(collision.gameObject);
             if(enemyHp < 1 )
             {
-                /*enemyAnimator.SetBool("ded", true);*/
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 StartCoroutine(DestroyEnemy());
@@ -72,7 +71,7 @@ public class EnemyDestrroyer : MonoBehaviour
     //Уничтожение через неск. сек. чтобы успела анимация проиграться
     IEnumerator DestroyEnemy()
     { 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
     //Если есть игрок на сцене то летит на него

@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-guid: ca9725a4bca173b47b90f5388b5f5377
+guid: 6ded75eb32bc23442b656a61dbfb0462
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 6033685638273178408
-    second: menu_freeButton_0
-  - first:
-      213: 1837462803561045998
-    second: menu_freeButton_1
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -46,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,49 +109,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: menu_freeButton_0
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 361
-        width: 313
-        height: 129
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 82b16a3ce15fbb350800000000000000
-      internalID: 6033685638273178408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: menu_freeButton_1
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 169
-        width: 319
-        height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eefdf3e3faaff7910800000000000000
-      internalID: 1837462803561045998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
