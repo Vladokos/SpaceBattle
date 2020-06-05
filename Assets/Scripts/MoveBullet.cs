@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveBullet : MonoBehaviour
 {
     private float speed = 10f;
+
+    private EnemyLife _enemyLife;
+    
+    public int dammage;
     void Start()
     {
         
@@ -13,6 +18,8 @@ public class MoveBullet : MonoBehaviour
     // Пуля двигается
     void Update()
     {
+
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+    
 }

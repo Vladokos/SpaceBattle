@@ -8,6 +8,7 @@ public class EnemyLife : MonoBehaviour
 {
     public int hp;
     public int enemyHp;
+    public int dm = 1;
 
     public BoxCollider2D bC,bc2;
     public Rigidbody2D rB2D;
@@ -21,12 +22,15 @@ public class EnemyLife : MonoBehaviour
     private GameObject explosion;
 
     private Vector3 _position;
+
+    private Statistick _statistick;
     // Start is called before the first frame update
     void Start()
     {
         enemyHp = hp;
         
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
+        _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
         bC = GetComponent<BoxCollider2D>();
         rB2D = GetComponent<Rigidbody2D>();
         
@@ -44,7 +48,7 @@ public class EnemyLife : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("LaserBullet"))
         {
-            Dm(1);
+            Dm();
             Destroy(collision.gameObject);
             if(enemyHp < 1)
             {
@@ -62,9 +66,9 @@ public class EnemyLife : MonoBehaviour
         }
     }
     //Уменьшение здоровья 
-    void Dm(int dm)
+    void Dm()
     {
-        enemyHp -= dm;
+        enemyHp -= _statistick.dm;
     }
     //Уничтожение через неск. сек. чтобы успела анимация проиграться
     IEnumerator DestroyEnemy()
