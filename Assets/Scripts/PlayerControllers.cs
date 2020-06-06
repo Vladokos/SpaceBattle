@@ -127,7 +127,7 @@ public class PlayerControllers : MonoBehaviour
         speedY = 0;
         fireAnim.SetBool("ArrowcClick", false);
         fireEngine.SetActive(false);
-        rb2d.drag = 5f;
+        rb2d.drag = _statistick.BrakingNum;
     }
     
     //Если умирает враг +1 очко

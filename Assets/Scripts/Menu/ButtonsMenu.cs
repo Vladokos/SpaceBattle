@@ -143,4 +143,15 @@ public class ButtonsMenu : MonoBehaviour
             _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         }
     }
+
+    public void LvlUpBraking()
+    {
+        if (_statistick.braking < 15)
+        {
+            _statistick.braking += 5;
+            _statistick.BrakingNum = _statistick.braking;
+            print(_statistick.BrakingNum);
+            _Text[5].SetText("Braking  " + _statistick.BrakingNum);
+        }
+    }
 }

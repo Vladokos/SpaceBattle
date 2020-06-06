@@ -12,4 +12,7 @@ public class Statistick : MonoBehaviour
 
     public float speed = 150;
     public float SpeedNum;
+
+    public float braking = 5f;
+    public float BrakingNum;
 }
