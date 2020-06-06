@@ -42,10 +42,13 @@ public class PlayerControllers : MonoBehaviour
     public bool _gameOver = false;
     
     public ParticleSystem explosion;
+    
+    private Statistick _statistick;
     void Start()
     {
-        playerHp = hp;
         rb2d = GetComponent<Rigidbody2D>();
+        _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
+        playerHp = _statistick.HpNum;
     }
     
     void FixedUpdate()
@@ -60,7 +63,7 @@ public class PlayerControllers : MonoBehaviour
     void MovePlayer()
     {
         Vector2 asd = new Vector2(speedX, speedY);
-        rb2d.AddForce(asd.normalized * horInput * Time.fixedDeltaTime);
+        rb2d.AddForce(asd.normalized * _statistick.SpeedNum * Time.fixedDeltaTime);
     }
     //Кнопка вверх
     public void UpArrow()

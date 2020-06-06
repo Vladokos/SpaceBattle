@@ -6,4 +6,10 @@ public class Statistick : MonoBehaviour
 {
     public int dm = 1;
     public int dmNum;
+
+    public int Hp = 3;
+    public int HpNum;
+
+    public float speed = 150;
+    public float SpeedNum;
 }

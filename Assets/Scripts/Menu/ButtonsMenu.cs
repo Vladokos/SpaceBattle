@@ -22,10 +22,9 @@ public class ButtonsMenu : MonoBehaviour
     public GameObject _playerShipM1;
 
     public List<TextMeshProUGUI> _Text;
-
-    /*public int dm = 1;
-    public int dmNum;*/
+    
     private Statistick _statistick;
+
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
@@ -66,7 +65,10 @@ public class ButtonsMenu : MonoBehaviour
         _RawImage[1].gameObject.SetActive(false);
         _Buttons[2].gameObject.SetActive(false);
         _Buttons[5].gameObject.SetActive(false);
-        HangarButtons[0].gameObject.SetActive(false);
+        foreach (Button b in HangarButtons)
+        {
+            b.gameObject.SetActive(false);
+        }
         foreach (TextMeshProUGUI t in _Text)
         {
             t.gameObject.SetActive(false);
@@ -95,7 +97,13 @@ public class ButtonsMenu : MonoBehaviour
         }
         _RawImage[1].gameObject.SetActive(true);
         _Buttons[5].gameObject.SetActive(true);
-        HangarButtons[0].gameObject.SetActive(true);
+        foreach (Button b in HangarButtons)
+        {
+            b.gameObject.SetActive(true);
+        }
+        /*HangarButtons[0].gameObject.SetActive(true);
+        HangarButtons[1].gameObject.SetActive(true);
+        HangarButtons[2].gameObject.SetActive(true);*/
         foreach (TextMeshProUGUI t in _Text)
         {
             t.gameObject.SetActive(true);
@@ -113,6 +121,26 @@ public class ButtonsMenu : MonoBehaviour
             _statistick.dmNum = _statistick.dm;
             Debug.Log(_statistick.dmNum);
             _Text[2].SetText("" + _statistick.dmNum);   
+        }
+    }
+    public void LvlUpHp()
+    {
+        if (_statistick.HpNum < 9)
+        {
+            _statistick.Hp++;
+            _statistick.HpNum = _statistick.Hp;
+            Debug.Log(_statistick.HpNum);
+            _Text[3].SetText("Hp  " + _statistick.HpNum);
+        }
+    }
+    public void LvlUpSpeed()
+    {
+        if (_statistick.speed < 350)
+        {
+            _statistick.speed += 50;
+            _statistick.SpeedNum = _statistick.speed;
+            print(_statistick.SpeedNum);
+            _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         }
     }
 }
