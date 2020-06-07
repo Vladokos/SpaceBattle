@@ -15,4 +15,21 @@ public class Statistick : MonoBehaviour
 
     public float braking = 5f;
     public float BrakingNum;
+
+    
+
+    private void Awake()
+    {
+        int numStaticsPlayer = FindObjectsOfType<Statistick>().Length;
+        if (numStaticsPlayer != 1)
+        {
+            Destroy(this.gameObject);
+        }
+        // if more then one music player is in the scene
+        //destroy ourselves
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }
