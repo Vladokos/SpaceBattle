@@ -33,11 +33,11 @@ public class ButtonsMenu : MonoBehaviour
     private int versionEnemy = 1;
     private int hpEnemy = 2;
     
-
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
         _AudioSource = GameObject.Find("MusicManager").GetComponent<AudioSource>();
+        
     }
 
     public void Update()
@@ -46,6 +46,7 @@ public class ButtonsMenu : MonoBehaviour
         _Text[3].SetText("Hp  " + _statistick.HpNum);
         _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         _Text[5].SetText("Braking  " + _statistick.BrakingNum);
+        
     }
 
     public void Play()
