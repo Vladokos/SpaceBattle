@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
@@ -19,7 +16,7 @@ public class Destroy : MonoBehaviour
     // Уничтожение пулек которые по y > 23
     void DestroyLaserBullet()
     {
-        if (CompareTag("LaserBullet") && transform.position.y > 23f )
+        if (CompareTag("LaserBullet") && transform.position.y > 23f)
         {
             Destroy(gameObject);
             Debug.Log("bulletDestroy");
