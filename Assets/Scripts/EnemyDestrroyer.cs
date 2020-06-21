@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDestrroyer : MonoBehaviour
@@ -8,22 +7,22 @@ public class EnemyDestrroyer : MonoBehaviour
     public int enemyHp;
 
     private float speed = 20f;
-    
+
     public BoxCollider2D bC;
     public Rigidbody2D rB2D;
     public Animator fireEngine;
-     
+
     private GameObject player;
     private PlayerControllers pC;
 
     public GameObject _fireEngine;
-    
+
     public ParticleSystem explosion;
     // Start is called before the first frame update
     void Start()
     {
         enemyHp = hp;
-        
+
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         player = GameObject.Find("Player");
     }
@@ -40,7 +39,7 @@ public class EnemyDestrroyer : MonoBehaviour
         {
             Dm(1);
             Destroy(collision.gameObject);
-            if(enemyHp < 1 )
+            if (enemyHp < 1)
             {
                 pC.enemyDestroy = true;
                 bC.enabled = false;
@@ -50,7 +49,7 @@ public class EnemyDestrroyer : MonoBehaviour
                 speed = 0;
             }
         }
-        if (collision.gameObject.CompareTag("Player") )
+        if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(DestroyEnemy());
             explosion.gameObject.SetActive(true);
@@ -70,7 +69,7 @@ public class EnemyDestrroyer : MonoBehaviour
     }
     //Уничтожение через неск. сек. чтобы успела анимация проиграться
     IEnumerator DestroyEnemy()
-    { 
+    {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
@@ -82,7 +81,7 @@ public class EnemyDestrroyer : MonoBehaviour
             Vector3 charge = (player.transform.position - transform.position).normalized;
             rB2D.AddForce(charge * speed);
             _fireEngine.gameObject.SetActive(true);
-            fireEngine.SetBool("move",true);
+            fireEngine.SetBool("move", true);
         }
     }
 }

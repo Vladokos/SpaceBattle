@@ -1,12 +1,7 @@
-﻿using System;
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PlayerControllers : MonoBehaviour
 {
@@ -38,11 +33,11 @@ public class PlayerControllers : MonoBehaviour
 
     public Button restartButton;
 
-    public float timeShoot,coolDownd;
+    public float timeShoot, coolDownd;
     public bool _gameOver = false;
-    
+
     public ParticleSystem explosion;
-    
+
     private Statistick _statistick;
     void Start()
     {
@@ -50,14 +45,14 @@ public class PlayerControllers : MonoBehaviour
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
         playerHp = _statistick.HpNum;
     }
-    
+
     void FixedUpdate()
     {
         UpdateScore();
         InvisibleWall();
         Reload();
         MovePlayer();
-        bulletVector = new Vector3(transform.position.x -0.055f, transform.position.y + 1f, transform.position.z);
+        bulletVector = new Vector3(transform.position.x - 0.055f, transform.position.y + 1f, transform.position.z);
     }
     //Движение игрока
     void MovePlayer()
@@ -70,7 +65,7 @@ public class PlayerControllers : MonoBehaviour
     {
         if (_gameOver == false)
         {
-            speedY = verInput * Time.deltaTime ;
+            speedY = verInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);
             rb2d.drag = 0f;
@@ -83,7 +78,7 @@ public class PlayerControllers : MonoBehaviour
         {
             speedY = -verInput * Time.deltaTime;
             fireEngine.SetActive(true);
-            fireAnim.SetBool("ArrowcClick", true); 
+            fireAnim.SetBool("ArrowcClick", true);
             rb2d.drag = 0f;
         }
     }
@@ -94,7 +89,7 @@ public class PlayerControllers : MonoBehaviour
         {
             speedX = -horInput * Time.deltaTime;
             fireEngine.SetActive(true);
-            fireAnim.SetBool("ArrowcClick", true);   
+            fireAnim.SetBool("ArrowcClick", true);
             rb2d.drag = 0f;
         }
     }
@@ -105,14 +100,14 @@ public class PlayerControllers : MonoBehaviour
         {
             speedX = horInput * Time.deltaTime;
             fireEngine.SetActive(true);
-            fireAnim.SetBool("ArrowcClick", true);   
+            fireAnim.SetBool("ArrowcClick", true);
             rb2d.drag = 0f;
         }
     }
     // кнопка выстрела
     public void fireArrow()
     {
-//Если время выстрела(timeShoot) <= 0 то можно произвести выстрел && игра не проиграна
+        //Если время выстрела(timeShoot) <= 0 то можно произвести выстрел && игра не проиграна
         if (timeShoot <= 0 && _gameOver == false)
         {
             timeShoot = coolDownd;
@@ -129,7 +124,7 @@ public class PlayerControllers : MonoBehaviour
         fireEngine.SetActive(false);
         rb2d.drag = _statistick.BrakingNum;
     }
-    
+
     //Если умирает враг +1 очко
     void UpdateScore()
     {
@@ -145,7 +140,7 @@ public class PlayerControllers : MonoBehaviour
     //И проверка здорвье
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
@@ -174,13 +169,13 @@ public class PlayerControllers : MonoBehaviour
     {
         playerHp -= dm;
     }
-//Уничтожение через определнный промежуток времени
+    //Уничтожение через определнный промежуток времени
     IEnumerator Destroy()
-    { 
+    {
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
-//прочитай название
+    //прочитай название
     void InvisibleWall()
     {
         if (transform.position.x < -xRange)
@@ -200,7 +195,7 @@ public class PlayerControllers : MonoBehaviour
             transform.position = new Vector3(transform.position.x, yRange + 4f, transform.position.z);
         }
     }
-// Если время выстрела(timeShoot) > 0 то его уменьшают с помошью Time.deltaTime
+    // Если время выстрела(timeShoot) > 0 то его уменьшают с помошью Time.deltaTime
     private void Reload()
     {
         if (timeShoot > 0)

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Statistick : MonoBehaviour
 {
@@ -16,8 +14,6 @@ public class Statistick : MonoBehaviour
     public float braking = 5f;
     public float BrakingNum;
 
-    
-
     private void Awake()
     {
         int numStaticsPlayer = FindObjectsOfType<Statistick>().Length;
@@ -31,5 +27,6 @@ public class Statistick : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
     }
 }

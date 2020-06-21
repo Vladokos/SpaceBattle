@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyLife : MonoBehaviour
 {
@@ -10,15 +7,15 @@ public class EnemyLife : MonoBehaviour
     public int enemyHp;
     public int dm = 1;
 
-    public BoxCollider2D bC,bc2;
+    public BoxCollider2D bC, bc2;
     public Rigidbody2D rB2D;
 
     private PlayerControllers pC;
-    
+
     public GameObject enemyBullet;
-    
-    public float timeShoot,coolDownd;
-    
+
+    public float timeShoot, coolDownd;
+
     private GameObject explosion;
 
     private Vector3 _position;
@@ -28,13 +25,13 @@ public class EnemyLife : MonoBehaviour
     void Start()
     {
         enemyHp = hp;
-        
+
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
         bC = GetComponent<BoxCollider2D>();
         rB2D = GetComponent<Rigidbody2D>();
-        
-        _position = new Vector3(transform.position.x,transform.position.y,-38f);
+
+        _position = new Vector3(transform.position.x, transform.position.y, -38f);
         explosion = GameObject.Find("Explosion");
     }
 
@@ -50,13 +47,13 @@ public class EnemyLife : MonoBehaviour
         {
             Dm();
             Destroy(collision.gameObject);
-            if(enemyHp < 1)
+            if (enemyHp < 1)
             {
                 StartCoroutine(DestroyEnemy());
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 bc2.enabled = false;
-                Instantiate(explosion,_position, Quaternion.identity);
+                Instantiate(explosion, _position, Quaternion.identity);
             }
         }
         //Если дотрагивается игрок то физика будет Kinematic чтоб игрок не мог толкать врага
@@ -82,7 +79,7 @@ public class EnemyLife : MonoBehaviour
         if (timeShoot <= 0 && pC._gameOver == false)
         {
             timeShoot = coolDownd;
-            Instantiate(enemyBullet, transform.position,Quaternion.identity);
+            Instantiate(enemyBullet, transform.position, Quaternion.identity);
         }
         if (timeShoot > 0 && pC._gameOver == false)
         {
