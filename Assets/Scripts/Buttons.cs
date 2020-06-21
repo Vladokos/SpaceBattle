@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using  UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class Buttons : MonoBehaviour
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
     }
 
-    public  void PauseButton()
+    public void PauseButton()
     {
         _playerControllers.restartButton.gameObject.SetActive(true);
         _playerControllers._gameOver = true;
