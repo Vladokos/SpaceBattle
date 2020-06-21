@@ -37,6 +37,8 @@ public class ButtonsMenu : MonoBehaviour
     private bool tapToplay;
 
     private ShipAnim _shipAnim;
+
+    public List<Image> optionImage;
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
@@ -78,9 +80,12 @@ public class ButtonsMenu : MonoBehaviour
             i.gameObject.SetActive(false);
         }
 
-        _Buttons[2].gameObject.SetActive(true);
+        _Buttons[7].gameObject.SetActive(true);
         musicON.gameObject.SetActive(true);
-        _RawImage[0].gameObject.SetActive(true);
+        foreach (Image image in optionImage )
+        {
+            image.gameObject.SetActive(true);
+        }
     }
     public void Resum()
     {
@@ -93,10 +98,10 @@ public class ButtonsMenu : MonoBehaviour
 
         _RawImage[0].gameObject.SetActive(false);
         _RawImage[1].gameObject.SetActive(false);
-        _RawImage[2].gameObject.SetActive(false);
 
         _Buttons[2].gameObject.SetActive(false);
         _Buttons[5].gameObject.SetActive(false);
+        _Buttons[7].gameObject.SetActive(false);
 
         InfoText[0].gameObject.SetActive(false);
         InfoText[1].gameObject.SetActive(false);
@@ -122,6 +127,10 @@ public class ButtonsMenu : MonoBehaviour
         foreach (TextMeshProUGUI t in _Text)
         {
             t.gameObject.SetActive(false);
+        }
+        foreach (Image image in optionImage )
+        {
+            image.gameObject.SetActive(false);
         }
 
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
@@ -158,19 +167,19 @@ public class ButtonsMenu : MonoBehaviour
             t.gameObject.SetActive(true);
         }
 
-        Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 90f);
+        Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 87f);
         _playerShipM1.transform.position = posShip;
     }
 
     public void LvlUpDamage()
     {
-        /*if (_statistick.dmNum < 3)
+        if (_statistick.dmNum < 3)
         {
             _statistick.dm++;
             _statistick.dmNum = _statistick.dm;
             Debug.Log(_statistick.dmNum);
             _Text[2].SetText("" + _statistick.dmNum);
-        }*/
+        }
     }
     public void LvlUpHp()
     {
@@ -319,17 +328,5 @@ public class ButtonsMenu : MonoBehaviour
         tapToplay = true;
         _AudioSource.Play();
 
-    }
-    public void GunLvl1()
-    {
-        _statistick.dm = 1;
-        _statistick.dmNum = _statistick.dm;
-        Debug.Log(_statistick.dmNum);
-    }
-    public void GunLvl2()
-    {
-        _statistick.dm = 2;
-        _statistick.dmNum = _statistick.dm;
-        Debug.Log(_statistick.dmNum);
     }
 }
