@@ -12,7 +12,7 @@ public class ButtonsMenu : MonoBehaviour
     public Button[] HangarButtons;
     public List<Button> InformButtons;
 
-    public Toggle musicON;
+    public List<Toggle> _toggle;
 
     public AudioSource _AudioSource;
 
@@ -30,45 +30,22 @@ public class ButtonsMenu : MonoBehaviour
     private int versionEnemy = 1;
     private int hpEnemy = 2;
 
-    private ButtonAnim playBtn;
-    private ButtonAnim infoBtn;
-    private ButtonAnim hangarBtn;
-    private ButtonAnim settingsBtn;
-    private bool tapToplay;
-
-    private ShipAnim _shipAnim;
-
     public List<Image> optionImage;
+
+    public GameObject singIn;
+
+    public List<Animator> _animator;
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
-
-        playBtn = GameObject.Find("PlayButton").GetComponent<ButtonAnim>();
-        infoBtn = GameObject.Find("Info").GetComponent<ButtonAnim>();
-        hangarBtn = GameObject.Find("Hangar").GetComponent<ButtonAnim>();
-        settingsBtn = GameObject.Find("OptionsButton ").GetComponent<ButtonAnim>();
-
-        _shipAnim = GameObject.Find("Player_ship_m1").GetComponent<ShipAnim>();
 
         _AudioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
     {
-
         CheckStatText();
-        if (tapToplay == true)
-        {
-            playBtn.movePos();
-            infoBtn.movePos();
-            hangarBtn.movePos();
-            settingsBtn.movePos();
-            _shipAnim.moveShip();
-            _Buttons[6].gameObject.SetActive(false);
-            _Text[6].gameObject.SetActive(false);
-        }
     }
-
     public void Play()
     {
         SceneManager.LoadScene("SampleScene");
@@ -79,29 +56,44 @@ public class ButtonsMenu : MonoBehaviour
         {
             i.gameObject.SetActive(false);
         }
-
-        _Buttons[7].gameObject.SetActive(true);
-        musicON.gameObject.SetActive(true);
+        singIn.SetActive(true);
+        _Buttons[6].gameObject.SetActive(true);
+        _toggle[0].gameObject.SetActive(true);
+        _toggle[1].gameObject.SetActive(true);
         foreach (Image image in optionImage )
         {
             image.gameObject.SetActive(true);
         }
+        _animator[0].SetBool("SettingsOpen", true);
+        _animator[1].SetBool("SettingsOpen", true);
     }
+    //переделать Resum под разные кнопки
+   /* public void Close()
+    {
+
+    }
+    public void ResumArrow()
+    {
+
+    }*/
     public void Resum()
     {
+        _animator[0].SetBool("SettingsOpen", false);
+        _animator[1].SetBool("SettingsOpen", false);
         foreach (Button i in _Buttons)
         {
             i.gameObject.SetActive(true);
         }
-
-        musicON.gameObject.SetActive(false);
+        singIn.SetActive(false);
+        _toggle[0].gameObject.SetActive(false);
+        _toggle[1].gameObject.SetActive(false);
 
         _RawImage[0].gameObject.SetActive(false);
         _RawImage[1].gameObject.SetActive(false);
 
         _Buttons[2].gameObject.SetActive(false);
         _Buttons[5].gameObject.SetActive(false);
-        _Buttons[7].gameObject.SetActive(false);
+        _Buttons[6].gameObject.SetActive(false);
 
         InfoText[0].gameObject.SetActive(false);
         InfoText[1].gameObject.SetActive(false);
@@ -124,21 +116,21 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
 
-        foreach (TextMeshProUGUI t in _Text)
-        {
-            t.gameObject.SetActive(false);
-        }
-        foreach (Image image in optionImage )
+        foreach (Image image in optionImage)
         {
             image.gameObject.SetActive(false);
         }
 
+        foreach (TextMeshProUGUI t in _Text)
+        {
+            t.gameObject.SetActive(false);
+        }
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
     }
     public void SoundOff()
     {
-        if (musicON.isOn)
+        if (_toggle[0].isOn)
         {
             _AudioSource.Play();
         }
@@ -167,7 +159,7 @@ public class ButtonsMenu : MonoBehaviour
             t.gameObject.SetActive(true);
         }
 
-        Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 87f);
+        Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 79f);
         _playerShipM1.transform.position = posShip;
     }
 
@@ -215,7 +207,7 @@ public class ButtonsMenu : MonoBehaviour
 
     public void Inform()
     {
-        _RawImage[2].gameObject.SetActive(true);
+        _RawImage[1].gameObject.SetActive(true);
 
         foreach (Button i in _Buttons)
         {
@@ -321,12 +313,5 @@ public class ButtonsMenu : MonoBehaviour
         _Text[3].SetText("Hp  " + _statistick.HpNum);
         _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         _Text[5].SetText("Braking  " + _statistick.BrakingNum);
-    }
-
-    public void TapToPlay()
-    {
-        tapToplay = true;
-        _AudioSource.Play();
-
     }
 }
