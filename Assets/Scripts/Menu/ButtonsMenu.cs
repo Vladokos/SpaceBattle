@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -46,47 +47,74 @@ public class ButtonsMenu : MonoBehaviour
     {
         CheckStatText();
     }
+    //Загружает сцену с игрой
     public void Play()
     {
         SceneManager.LoadScene("SampleScene");
     }
+    //Открывает настройки делает кнопки и анимацию активными
     public void Settings()
     {
         foreach (Button i in _Buttons)
         {
             i.gameObject.SetActive(false);
         }
+
         singIn.SetActive(true);
         _Buttons[6].gameObject.SetActive(true);
         _toggle[0].gameObject.SetActive(true);
         _toggle[1].gameObject.SetActive(true);
-        foreach (Image image in optionImage )
+
+        foreach (Image image in optionImage)
         {
             image.gameObject.SetActive(true);
         }
+
         _animator[0].SetBool("SettingsOpen", true);
         _animator[1].SetBool("SettingsOpen", true);
     }
-    //переделать Resum под разные кнопки
-   /* public void Close()
+    //Кнопка крестик - делает объекты и анимацию не активной но кнопки в гл мнею активными
+    public void Close()
+    {
+
+        _animator[0].SetBool("SettingsOpen", false);
+        _animator[1].SetBool("SettingsOpen", false);
+
+        StartCoroutine(setActivFlase());
+    }
+    IEnumerator setActivFlase()
+    {
+        yield return new WaitForSeconds(1.3f);
+
+        _animator[0].SetBool("IsDone", true);
+        _animator[1].SetBool("IsDone", true);
+
+        singIn.SetActive(false);
+
+        _toggle[0].gameObject.SetActive(false);
+        _toggle[1].gameObject.SetActive(false);
+
+        foreach (Image image in optionImage)
+        {
+            image.gameObject.SetActive(false);
+        }
+
+        ResumArrow();
+
+    }
+    //Кнопка стрелочки выхода - делает объекты  не активной но кнопки в гл мнею активными
+
+    //сделать для стрелки ангара
+    public void ResumArrowHangar()
     {
 
     }
     public void ResumArrow()
     {
-
-    }*/
-    public void Resum()
-    {
-        _animator[0].SetBool("SettingsOpen", false);
-        _animator[1].SetBool("SettingsOpen", false);
         foreach (Button i in _Buttons)
         {
             i.gameObject.SetActive(true);
         }
-        singIn.SetActive(false);
-        _toggle[0].gameObject.SetActive(false);
-        _toggle[1].gameObject.SetActive(false);
 
         _RawImage[0].gameObject.SetActive(false);
         _RawImage[1].gameObject.SetActive(false);
@@ -116,18 +144,20 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
 
-        foreach (Image image in optionImage)
-        {
-            image.gameObject.SetActive(false);
-        }
-
         foreach (TextMeshProUGUI t in _Text)
         {
             t.gameObject.SetActive(false);
         }
+
+        _animator[2].SetBool("IsOpen", false);
+        _animator[3].SetBool("IsOpen", false);
+        _animator[4].SetBool("IsOpen", false);
+        _animator[5].SetBool("IsOpen", false);
+
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
     }
+    //Вкл/Выкл музыки
     public void SoundOff()
     {
         if (_toggle[0].isOn)
@@ -139,15 +169,18 @@ public class ButtonsMenu : MonoBehaviour
             _AudioSource.Stop();
         }
     }
-
+    //Открывает ангар делает нужыне кнопки активными другие нет 
     public void Hangar()
     {
+        /*Vector3 posShip = new Vector3(_playerShipM1.transform.position.x,-7.53f, 79f);
+        _playerShipM1.transform.position = posShip;*/
+
         foreach (Button i in _Buttons)
         {
             i.gameObject.SetActive(false);
         }
 
-        _RawImage[1].gameObject.SetActive(true);
+        _RawImage[0].gameObject.SetActive(true);
         _Buttons[5].gameObject.SetActive(true);
         foreach (Button b in HangarButtons)
         {
@@ -159,10 +192,12 @@ public class ButtonsMenu : MonoBehaviour
             t.gameObject.SetActive(true);
         }
 
-        Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 79f);
-        _playerShipM1.transform.position = posShip;
+        _animator[2].SetBool("IsOpen",true);
+        _animator[3].SetBool("IsOpen", true);
+        _animator[4].SetBool("IsOpen", true);
+        _animator[5].SetBool("IsOpen", true);
     }
-
+    //дмг +
     public void LvlUpDamage()
     {
         if (_statistick.dmNum < 3)
@@ -173,6 +208,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[2].SetText("" + _statistick.dmNum);
         }
     }
+    //хп +
     public void LvlUpHp()
     {
         if (_statistick.HpNum < 9)
@@ -183,6 +219,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[3].SetText("Hp  " + _statistick.HpNum);
         }
     }
+    //скорость +
     public void LvlUpSpeed()
     {
         if (_statistick.speed < 350)
@@ -193,7 +230,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         }
     }
-
+    //тормозной путь -
     public void LvlUpBraking()
     {
         if (_statistick.braking < 15)
@@ -204,7 +241,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[5].SetText("Braking  " + _statistick.BrakingNum);
         }
     }
-
+    //Открывает инфвормацию о врагах и делает нужыне кнопки активными другие нет
     public void Inform()
     {
         _RawImage[1].gameObject.SetActive(true);
@@ -224,7 +261,7 @@ public class ButtonsMenu : MonoBehaviour
         _Buttons[5].gameObject.SetActive(true);
         enemy[0].gameObject.SetActive(true);
     }
-
+    //Стрелка для перемещения в inform
     public void RightArrow()
     {
         if (versionEnemy < 6)
@@ -254,7 +291,7 @@ public class ButtonsMenu : MonoBehaviour
             case 5:
                 enemy[3].gameObject.SetActive(false);
                 enemy[4].gameObject.SetActive(true);
-                InfoText[1].SetText("HP:" + hpEnemy + "\n" + "Helper" + "\n" + "Hp:2" + "\n" );
+                InfoText[1].SetText("HP:" + hpEnemy + "\n" + "Helper" + "\n" + "Hp:2" + "\n");
                 break;
             case 6:
                 enemy[4].gameObject.SetActive(false);
@@ -264,7 +301,7 @@ public class ButtonsMenu : MonoBehaviour
                 break;
         }
     }
-
+    //Стрелка для перемещения в inform
     public void LeftArrow()
     {
         if (versionEnemy != 7 && versionEnemy != 1)
@@ -306,7 +343,7 @@ public class ButtonsMenu : MonoBehaviour
                 break;
         }
     }
-
+    //Проверка на значение в Statick 
     public void CheckStatText()
     {
         _Text[2].SetText("" + _statistick.dm);
