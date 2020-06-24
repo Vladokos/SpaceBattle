@@ -107,7 +107,38 @@ public class ButtonsMenu : MonoBehaviour
     //сделать для стрелки ангара
     public void ResumArrowHangar()
     {
+        _animator[2].SetBool("IsOpen", false);
+        _animator[3].SetBool("IsOpen", false);
+        _animator[4].SetBool("IsOpen", false);
+        _animator[5].SetBool("IsOpen", false);
+        _animator[6].SetBool("IsOpen", false);
 
+        StartCoroutine(outHangar());
+    }
+    IEnumerator outHangar()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _animator[2].SetBool("AnimEnd", true);
+        _animator[3].SetBool("AnimEnd", true);
+        _animator[4].SetBool("AnimEnd", true);
+        _animator[5].SetBool("AnimEnd", true);
+        _animator[6].SetBool("AnimEnd", true);
+
+        foreach (Button b in HangarButtons)
+        {
+            b.gameObject.SetActive(false);
+        }
+
+        foreach (TextMeshProUGUI t in _Text)
+        {
+            t.gameObject.SetActive(false);
+        }
+
+        _Buttons[2].gameObject.SetActive(false);
+
+        _RawImage[0].gameObject.SetActive(false);
+
+        ResumArrow();
     }
     public void ResumArrow()
     {
@@ -116,11 +147,13 @@ public class ButtonsMenu : MonoBehaviour
             i.gameObject.SetActive(true);
         }
 
-        _RawImage[0].gameObject.SetActive(false);
+       
         _RawImage[1].gameObject.SetActive(false);
 
-        _Buttons[2].gameObject.SetActive(false);
         _Buttons[5].gameObject.SetActive(false);
+
+        _Buttons[2].gameObject.SetActive(false);
+        
         _Buttons[6].gameObject.SetActive(false);
 
         InfoText[0].gameObject.SetActive(false);
@@ -134,25 +167,14 @@ public class ButtonsMenu : MonoBehaviour
             e.gameObject.SetActive(false);
         }
 
-        foreach (Button b in HangarButtons)
-        {
-            b.gameObject.SetActive(false);
-        }
-
         foreach (Button f in InformButtons)
         {
             f.gameObject.SetActive(false);
         }
 
-        foreach (TextMeshProUGUI t in _Text)
-        {
-            t.gameObject.SetActive(false);
-        }
+       
 
-        _animator[2].SetBool("IsOpen", false);
-        _animator[3].SetBool("IsOpen", false);
-        _animator[4].SetBool("IsOpen", false);
-        _animator[5].SetBool("IsOpen", false);
+        
 
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
@@ -181,7 +203,7 @@ public class ButtonsMenu : MonoBehaviour
         }
 
         _RawImage[0].gameObject.SetActive(true);
-        _Buttons[5].gameObject.SetActive(true);
+        _Buttons[2].gameObject.SetActive(true);
         foreach (Button b in HangarButtons)
         {
             b.gameObject.SetActive(true);
@@ -196,6 +218,10 @@ public class ButtonsMenu : MonoBehaviour
         _animator[3].SetBool("IsOpen", true);
         _animator[4].SetBool("IsOpen", true);
         _animator[5].SetBool("IsOpen", true);
+        _animator[6].SetBool("IsOpen", true);
+
+
+        _animator[4].SetBool("AnimEnd", false);
     }
     //дмг +
     public void LvlUpDamage()
