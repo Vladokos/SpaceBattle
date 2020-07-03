@@ -36,11 +36,14 @@ public class ButtonsMenu : MonoBehaviour
     public GameObject singIn;
 
     public List<Animator> _animator;
+
+    private int a;
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
 
         _AudioSource = GetComponent<AudioSource>();
+
     }
 
     public void Update()
@@ -138,22 +141,22 @@ public class ButtonsMenu : MonoBehaviour
 
         _RawImage[0].gameObject.SetActive(false);
 
-        ResumArrow();
+        cHangar();
     }
-    public void ResumArrow()
+    public void cHangar()
     {
         foreach (Button i in _Buttons)
         {
             i.gameObject.SetActive(true);
         }
 
-       
+
         _RawImage[1].gameObject.SetActive(false);
 
         _Buttons[5].gameObject.SetActive(false);
 
         _Buttons[2].gameObject.SetActive(false);
-        
+
         _Buttons[6].gameObject.SetActive(false);
 
         InfoText[0].gameObject.SetActive(false);
@@ -171,10 +174,55 @@ public class ButtonsMenu : MonoBehaviour
         {
             f.gameObject.SetActive(false);
         }
+    }
 
-       
+    IEnumerator outInfo()
+    {
+        yield return new WaitForSeconds(2f);
+        _animator[7].SetBool("End", true);
+        _animator[8].SetBool("End", true);
+        _animator[9].SetBool("End", true);
 
-        
+
+        foreach (Button i in _Buttons)
+        {
+            i.gameObject.SetActive(true);
+        }
+
+
+        _RawImage[1].gameObject.SetActive(false);
+
+        _Buttons[5].gameObject.SetActive(false);
+
+        _Buttons[2].gameObject.SetActive(false);
+
+        _Buttons[6].gameObject.SetActive(false);
+
+        InfoText[0].gameObject.SetActive(false);
+        InfoText[1].gameObject.SetActive(false);
+
+        versionEnemy = 1;
+        hpEnemy = 2;
+
+        foreach (GameObject e in enemy)
+        {
+            e.gameObject.SetActive(false);
+        }
+
+        foreach (Button f in InformButtons)
+        {
+            f.gameObject.SetActive(false);
+        }
+    }
+    public void ResumArrow()
+    {
+        StartCoroutine(outInfo());
+
+
+        _animator[7].SetBool("Open", false);
+        _animator[8].SetBool("Open", false);
+        _animator[9].SetBool("Open", false);
+
 
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
@@ -286,7 +334,13 @@ public class ButtonsMenu : MonoBehaviour
         InfoText[1].gameObject.SetActive(true);
         _Buttons[5].gameObject.SetActive(true);
         enemy[0].gameObject.SetActive(true);
+
+
+        _animator[7].SetBool("Open", true);
+        _animator[8].SetBool("Open", true);
+        _animator[9].SetBool("Open", true);
     }
+
     //Стрелка для перемещения в inform
     public void RightArrow()
     {

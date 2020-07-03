@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     public bool gameStart;
 
     private float spawnPosX = 6f;
-    private float spawnPosY = 3f;
+    private float spawnPosY = 18f;
 
     public List<GameObject> enemesPref;
 

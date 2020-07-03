@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyLife : MonoBehaviour
 {
@@ -21,9 +24,19 @@ public class EnemyLife : MonoBehaviour
     private Vector3 _position;
 
     private Statistick _statistick;
+
+    public List<Transform> movePos;
+    private int randomPos;
+
+    float speed = 7f;
+
+    /*private float waitTime;
+    public float startWaitTime;*/
     // Start is called before the first frame update
     void Start()
     {
+        /*waitTime = startWaitTime;*/
+
         enemyHp = hp;
 
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
@@ -33,12 +46,16 @@ public class EnemyLife : MonoBehaviour
 
         _position = new Vector3(transform.position.x, transform.position.y, -38f);
         explosion = GameObject.Find("Explosion");
+
+        randomPos = Random.Range(0, movePos.Count);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Shoot();
+        movePoint();
+        Debug.Log(randomPos);
     }
     //Если дотронулся пуля игрока то отнимается жизнь
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,6 +77,12 @@ public class EnemyLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             rB2D.bodyType = RigidbodyType2D.Kinematic;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            rB2D.bodyType = RigidbodyType2D.Kinematic;
+            randomPos = Random.Range(0, movePos.Count);
+            transform.position = Vector2.MoveTowards(transform.position, movePos[randomPos].position, Time.fixedDeltaTime * speed);
         }
     }
     //Уменьшение здоровья 
@@ -85,5 +108,22 @@ public class EnemyLife : MonoBehaviour
         {
             timeShoot -= Time.deltaTime;
         }
+    }
+    void movePoint()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, movePos[randomPos].position,Time.fixedDeltaTime * speed);
+
+       /* if(Vector2.Distance(transform.position,movePos[randomPos].position)<0.2f)
+        {
+            if (waitTime <= 0)
+            {
+                randomPos = Random.Range(0, movePos.Length);
+                waitTime = startWaitTime;
+            }
+            else
+            {
+                waitTime -= Time.fixedDeltaTime;
+            }
+        }*/
     }
 }
