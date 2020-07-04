@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 5
   enemyHp: 0
+  dm: 1
   bC: {fileID: -1388119248857903818}
   bc2: {fileID: 1890649865679116206}
   rB2D: {fileID: -5899829889947600755}
@@ -251,6 +252,7 @@ MonoBehaviour:
     type: 3}
   timeShoot: 1
   coolDownd: 4
+  movePos: []
 --- !u!61 &1890649865679116206
 BoxCollider2D:
   m_ObjectHideFlags: 0

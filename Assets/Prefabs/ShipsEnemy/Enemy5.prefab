@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 6
   enemyHp: 0
+  dm: 1
   bC: {fileID: 1233196915823773226}
   bc2: {fileID: 4031441942610198225}
   rB2D: {fileID: 1233196915823773237}
@@ -135,6 +136,7 @@ MonoBehaviour:
     type: 3}
   timeShoot: 1
   coolDownd: 4
+  movePos: []
 --- !u!50 &1233196915823773237
 Rigidbody2D:
   serializedVersion: 4
@@ -308,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 2
   enemyHp: 0
+  dm: 1
   bC: {fileID: 1233196915953164618}
   bc2: {fileID: 140651899080166788}
   rB2D: {fileID: 1233196915953164628}
@@ -315,6 +318,7 @@ MonoBehaviour:
     type: 3}
   timeShoot: 2
   coolDownd: 3
+  movePos: []
 --- !u!50 &1233196915953164628
 Rigidbody2D:
   serializedVersion: 4
@@ -488,6 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 2
   enemyHp: 0
+  dm: 1
   bC: {fileID: 1233196916835124251}
   bc2: {fileID: 5620114917079795752}
   rB2D: {fileID: 1233196916835124261}
@@ -495,6 +500,7 @@ MonoBehaviour:
     type: 3}
   timeShoot: 2
   coolDownd: 3
+  movePos: []
 --- !u!50 &1233196916835124261
 Rigidbody2D:
   serializedVersion: 4

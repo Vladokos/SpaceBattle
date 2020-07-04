@@ -26,7 +26,11 @@ public class EnemyLife : MonoBehaviour
     private Statistick _statistick;
 
     public List<Transform> movePos;
-    private int randomPos;
+
+    private float randomPosX;
+    private float randomPosY;
+
+    Vector2 forward;
 
     float speed = 7f;
 
@@ -36,6 +40,8 @@ public class EnemyLife : MonoBehaviour
     void Start()
     {
         /*waitTime = startWaitTime;*/
+
+        
 
         enemyHp = hp;
 
@@ -47,7 +53,10 @@ public class EnemyLife : MonoBehaviour
         _position = new Vector3(transform.position.x, transform.position.y, -38f);
         explosion = GameObject.Find("Explosion");
 
-        randomPos = Random.Range(0, movePos.Count);
+        randomPosX = Random.Range(6f,-6f);
+        randomPosY = Random.Range(-2f, 15f);
+
+        forward = new Vector2(randomPosX, randomPosY);
     }
 
     // Update is called once per frame
@@ -55,7 +64,6 @@ public class EnemyLife : MonoBehaviour
     {
         Shoot();
         movePoint();
-        Debug.Log(randomPos);
     }
     //Если дотронулся пуля игрока то отнимается жизнь
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,8 +89,7 @@ public class EnemyLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             rB2D.bodyType = RigidbodyType2D.Kinematic;
-            randomPos = Random.Range(0, movePos.Count);
-            transform.position = Vector2.MoveTowards(transform.position, movePos[randomPos].position, Time.fixedDeltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, forward, Time.fixedDeltaTime * speed);
         }
     }
     //Уменьшение здоровья 
@@ -111,7 +118,7 @@ public class EnemyLife : MonoBehaviour
     }
     void movePoint()
     {
-        transform.position = Vector2.MoveTowards(transform.position, movePos[randomPos].position,Time.fixedDeltaTime * speed);
+        transform.position = Vector2.MoveTowards(transform.position,forward,Time.fixedDeltaTime * speed);
 
        /* if(Vector2.Distance(transform.position,movePos[randomPos].position)<0.2f)
         {
