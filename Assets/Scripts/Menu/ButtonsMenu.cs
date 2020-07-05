@@ -241,6 +241,17 @@ public class ButtonsMenu : MonoBehaviour
             _statistick.musickToggle = false;
         }
     }
+    public void EffectToggle()
+    {
+        if (_toggle[1].isOn)
+        {
+            _statistick.effectToggle = true;
+        }
+        else
+        {
+            _statistick.effectToggle = false;
+        }
+    }
     //Открывает ангар делает нужыне кнопки активными другие нет 
     public void Hangar()
     {

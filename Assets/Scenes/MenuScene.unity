@@ -3428,7 +3428,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1201507661}
-        m_MethodName: SoundOff
+        m_MethodName: EffectToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5204,6 +5204,7 @@ MonoBehaviour:
   braking: 5
   BrakingNum: 5
   musickToggle: 1
+  effectToggle: 1
 --- !u!4 &1343779566
 Transform:
   m_ObjectHideFlags: 0

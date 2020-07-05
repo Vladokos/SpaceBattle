@@ -6,7 +6,7 @@ public class MusicManager : MonoBehaviour
 {
     private Statistick _statistick;
 
-    public AudioSource audioS;
+    public List<AudioSource> audioS;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,12 @@ public class MusicManager : MonoBehaviour
     {
         if(_statistick.musickToggle == false)
         {
-            audioS.gameObject.SetActive(false);
+            audioS[0].gameObject.SetActive(false);
+        }
+        if(_statistick.effectToggle == false)
+        {
+            audioS[1].Stop();
+            audioS[2].Stop();
         }
     }
 }

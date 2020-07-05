@@ -15,6 +15,7 @@ public class Statistick : MonoBehaviour
     public float BrakingNum;
 
     public bool musickToggle = true;
+    public bool effectToggle = true;
 
     private void Awake()
     {
@@ -33,6 +34,6 @@ public class Statistick : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(musickToggle);
+        print(effectToggle);
     }
 }
