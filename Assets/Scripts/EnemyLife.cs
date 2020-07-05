@@ -25,11 +25,12 @@ public class EnemyLife : MonoBehaviour
 
     private Statistick _statistick;
 
-    public List<Transform> movePos;
+    private float localPosX;
+    private float localPosY;
+    Vector2 localPos;
 
     private float randomPosX;
     private float randomPosY;
-
     Vector2 forward;
 
     float speed = 7f;
@@ -88,8 +89,9 @@ public class EnemyLife : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            rB2D.bodyType = RigidbodyType2D.Kinematic;
+            localPos = new Vector2(transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, forward, Time.fixedDeltaTime * speed);
+            rB2D.bodyType = RigidbodyType2D.Kinematic;
         }
     }
     //Уменьшение здоровья 

@@ -39,8 +39,11 @@ public class PlayerControllers : MonoBehaviour
     public ParticleSystem explosion;
 
     private Statistick _statistick;
+
+
     void Start()
     {
+     
         rb2d = GetComponent<Rigidbody2D>();
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
         playerHp = _statistick.HpNum;

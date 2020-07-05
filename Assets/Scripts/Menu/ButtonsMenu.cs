@@ -233,10 +233,12 @@ public class ButtonsMenu : MonoBehaviour
         if (_toggle[0].isOn)
         {
             _AudioSource.Play();
+            _statistick.musickToggle = true;
         }
         else
         {
             _AudioSource.Stop();
+            _statistick.musickToggle = false;
         }
     }
     //Открывает ангар делает нужыне кнопки активными другие нет 

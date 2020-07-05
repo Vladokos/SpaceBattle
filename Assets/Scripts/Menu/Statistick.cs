@@ -14,6 +14,8 @@ public class Statistick : MonoBehaviour
     public float braking = 5f;
     public float BrakingNum;
 
+    public bool musickToggle = true;
+
     private void Awake()
     {
         int numStaticsPlayer = FindObjectsOfType<Statistick>().Length;
@@ -28,5 +30,9 @@ public class Statistick : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
+    }
+    private void Update()
+    {
+        Debug.Log(musickToggle);
     }
 }
