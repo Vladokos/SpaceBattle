@@ -36,17 +36,23 @@ public class PlayerControllers : MonoBehaviour
     public float timeShoot, coolDownd;
     public bool _gameOver = false;
 
-    public ParticleSystem explosion;
+    private GameObject explosion;
+    private Vector3 positionExplosion;
 
     private Statistick _statistick;
 
-
+    private Buttons _buttons;
     void Start()
     {
-     
+        explosion = GameObject.Find("Explosion");
+
         rb2d = GetComponent<Rigidbody2D>();
+
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
+
         playerHp = _statistick.HpNum;
+
+        _buttons = GameObject.Find("UIManager").GetComponent<Buttons>();
     }
 
     void FixedUpdate()
@@ -149,34 +155,23 @@ public class PlayerControllers : MonoBehaviour
             Destroy(collision.gameObject);
             Dm(1);
         }
-        if (playerHp < 1)
+        if (playerHp < 1 || collision.gameObject.CompareTag("Destroyer"))
         {
             _gameOver = true;
-            StartCoroutine(Destroy());
-            explosion.gameObject.SetActive(true);
-            explosion.Play();
+
+            Destroy(gameObject);
+            positionExplosion = new Vector3(transform.position.x, transform.position.y, -46f);
+            Instantiate(explosion, positionExplosion, Quaternion.identity);
+
             boom.Play();
-            restartButton.gameObject.SetActive(true);
-        }
-        if (collision.gameObject.CompareTag("Destroyer"))
-        {
-            restartButton.gameObject.SetActive(true);
-            StartCoroutine(Destroy());
-            explosion.gameObject.SetActive(true);
-            explosion.Play();
-            boom.Play();
+            _buttons.PauseButton();
+            _buttons._Buttons[0].gameObject.SetActive(false);
         }
     }
     //Снижение здоровья
     void Dm(int dm)
     {
         playerHp -= dm;
-    }
-    //Уничтожение через определнный промежуток времени
-    IEnumerator Destroy()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
     }
     //прочитай название
     void InvisibleWall()

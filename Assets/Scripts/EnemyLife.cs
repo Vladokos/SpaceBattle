@@ -48,10 +48,12 @@ public class EnemyLife : MonoBehaviour
 
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
+
         bC = GetComponent<BoxCollider2D>();
         rB2D = GetComponent<Rigidbody2D>();
 
-        _position = new Vector3(transform.position.x, transform.position.y, -38f);
+        
+
         explosion = GameObject.Find("Explosion");
 
         randomPosX = Random.Range(6f,-6f);
@@ -75,10 +77,11 @@ public class EnemyLife : MonoBehaviour
             Destroy(collision.gameObject);
             if (enemyHp < 1)
             {
-                StartCoroutine(DestroyEnemy());
+                Destroy(gameObject);
                 pC.enemyDestroy = true;
                 bC.enabled = false;
                 bc2.enabled = false;
+                _position = new Vector3(transform.position.x, transform.position.y, -38f);
                 Instantiate(explosion, _position, Quaternion.identity);
             }
         }
@@ -98,12 +101,6 @@ public class EnemyLife : MonoBehaviour
     void Dm()
     {
         enemyHp -= _statistick.dm;
-    }
-    //Уничтожение через неск. сек. чтобы успела анимация проиграться
-    IEnumerator DestroyEnemy()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
     }
     //Вермя через которое может выстрелить враг
     void Shoot()

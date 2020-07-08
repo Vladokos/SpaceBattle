@@ -37,12 +37,16 @@ public class ButtonsMenu : MonoBehaviour
 
     public List<Animator> _animator;
 
-    private int a;
+    public List<Slider> sliders;
+    private float muSvolume;
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
 
         _AudioSource = GetComponent<AudioSource>();
+
+        muSvolume = _statistick.musickVolume;
+        sliders[0].value = muSvolume;
 
     }
 
@@ -50,6 +54,7 @@ public class ButtonsMenu : MonoBehaviour
     {
         CheckStatText();
     }
+
     //Загружает сцену с игрой
     public void Play()
     {
@@ -76,6 +81,7 @@ public class ButtonsMenu : MonoBehaviour
         _animator[0].SetBool("SettingsOpen", true);
         _animator[1].SetBool("SettingsOpen", true);
     }
+
     //Кнопка крестик - делает объекты и анимацию не активной но кнопки в гл мнею активными
     public void Close()
     {
@@ -85,6 +91,7 @@ public class ButtonsMenu : MonoBehaviour
 
         StartCoroutine(setActivFlase());
     }
+
     IEnumerator setActivFlase()
     {
         yield return new WaitForSeconds(1.3f);
@@ -102,12 +109,42 @@ public class ButtonsMenu : MonoBehaviour
             image.gameObject.SetActive(false);
         }
 
-        ResumArrow();
-
+        Menu();
     }
-    //Кнопка стрелочки выхода - делает объекты  не активной но кнопки в гл мнею активными
 
-    //сделать для стрелки ангара
+    private void Menu()
+    {
+        foreach (Button i in _Buttons)
+        {
+            i.gameObject.SetActive(true);
+        }
+
+
+        _RawImage[1].gameObject.SetActive(false);
+
+        _Buttons[5].gameObject.SetActive(false);
+
+        _Buttons[2].gameObject.SetActive(false);
+
+        _Buttons[6].gameObject.SetActive(false);
+
+        InfoText[0].gameObject.SetActive(false);
+        InfoText[1].gameObject.SetActive(false);
+
+        versionEnemy = 1;
+        hpEnemy = 2;
+
+        foreach (GameObject e in enemy)
+        {
+            e.gameObject.SetActive(false);
+        }
+
+        foreach (Button f in InformButtons)
+        {
+            f.gameObject.SetActive(false);
+        }
+    }
+
     public void ResumArrowHangar()
     {
         _animator[2].SetBool("IsOpen", false);
@@ -118,6 +155,7 @@ public class ButtonsMenu : MonoBehaviour
 
         StartCoroutine(outHangar());
     }
+
     IEnumerator outHangar()
     {
         yield return new WaitForSeconds(1.5f);
@@ -143,6 +181,7 @@ public class ButtonsMenu : MonoBehaviour
 
         cHangar();
     }
+
     public void cHangar()
     {
         foreach (Button i in _Buttons)
@@ -214,6 +253,7 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
     }
+
     public void ResumArrow()
     {
         StartCoroutine(outInfo());
@@ -227,20 +267,7 @@ public class ButtonsMenu : MonoBehaviour
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
     }
-    //Вкл/Выкл музыки
-    public void SoundOff()
-    {
-        if (_toggle[0].isOn)
-        {
-            _AudioSource.Play();
-            _statistick.musickToggle = true;
-        }
-        else
-        {
-            _AudioSource.Stop();
-            _statistick.musickToggle = false;
-        }
-    }
+
     public void EffectToggle()
     {
         if (_toggle[1].isOn)
@@ -252,6 +279,7 @@ public class ButtonsMenu : MonoBehaviour
             _statistick.effectToggle = false;
         }
     }
+
     //Открывает ангар делает нужыне кнопки активными другие нет 
     public void Hangar()
     {
@@ -275,7 +303,7 @@ public class ButtonsMenu : MonoBehaviour
             t.gameObject.SetActive(true);
         }
 
-        _animator[2].SetBool("IsOpen",true);
+        _animator[2].SetBool("IsOpen", true);
         _animator[3].SetBool("IsOpen", true);
         _animator[4].SetBool("IsOpen", true);
         _animator[5].SetBool("IsOpen", true);
@@ -284,6 +312,7 @@ public class ButtonsMenu : MonoBehaviour
 
         _animator[4].SetBool("AnimEnd", false);
     }
+
     //дмг +
     public void LvlUpDamage()
     {
@@ -295,6 +324,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[2].SetText("" + _statistick.dmNum);
         }
     }
+
     //хп +
     public void LvlUpHp()
     {
@@ -306,6 +336,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[3].SetText("Hp  " + _statistick.HpNum);
         }
     }
+
     //скорость +
     public void LvlUpSpeed()
     {
@@ -317,6 +348,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         }
     }
+
     //тормозной путь -
     public void LvlUpBraking()
     {
@@ -328,6 +360,7 @@ public class ButtonsMenu : MonoBehaviour
             _Text[5].SetText("Braking  " + _statistick.BrakingNum);
         }
     }
+
     //Открывает инфвормацию о врагах и делает нужыне кнопки активными другие нет
     public void Inform()
     {
@@ -394,6 +427,7 @@ public class ButtonsMenu : MonoBehaviour
                 break;
         }
     }
+
     //Стрелка для перемещения в inform
     public void LeftArrow()
     {
@@ -436,6 +470,7 @@ public class ButtonsMenu : MonoBehaviour
                 break;
         }
     }
+
     //Проверка на значение в Statick 
     public void CheckStatText()
     {
@@ -444,4 +479,12 @@ public class ButtonsMenu : MonoBehaviour
         _Text[4].SetText("Speed  " + _statistick.SpeedNum);
         _Text[5].SetText("Braking  " + _statistick.BrakingNum);
     }
+
+    public void MusicSlider()
+    {
+        muSvolume = sliders[0].value;
+        _AudioSource.volume = muSvolume;
+        _statistick.musickVolume = muSvolume;
+    }
+
 }

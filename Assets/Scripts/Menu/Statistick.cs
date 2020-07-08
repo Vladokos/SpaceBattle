@@ -14,7 +14,7 @@ public class Statistick : MonoBehaviour
     public float braking = 5f;
     public float BrakingNum;
 
-    public bool musickToggle = true;
+    public float musickVolume;
     public bool effectToggle = true;
 
     private void Awake()
@@ -31,9 +31,5 @@ public class Statistick : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-    }
-    private void Update()
-    {
-        print(effectToggle);
     }
 }

@@ -6,7 +6,7 @@ public class EnemyDestrroyer : MonoBehaviour
     public int hp;
     public int enemyHp;
 
-    private float speed = 20f;
+    private float speed = 5f;
 
     public BoxCollider2D bC;
     public Rigidbody2D rB2D;
@@ -17,10 +17,13 @@ public class EnemyDestrroyer : MonoBehaviour
 
     public GameObject _fireEngine;
 
-    public ParticleSystem explosion;
+    private GameObject explosion;
+    private Vector3 _position;
     // Start is called before the first frame update
     void Start()
     {
+        explosion = GameObject.Find("Explosion");
+
         enemyHp = hp;
 
         pC = GameObject.Find("Player").GetComponent<PlayerControllers>();
@@ -43,17 +46,17 @@ public class EnemyDestrroyer : MonoBehaviour
             {
                 pC.enemyDestroy = true;
                 bC.enabled = false;
-                StartCoroutine(DestroyEnemy());
-                explosion.gameObject.SetActive(true);
-                explosion.Play();
+                Destroy(gameObject);
+                _position = new Vector3(transform.position.x, transform.position.y, -38f);
+                Instantiate(explosion, _position, Quaternion.identity);
                 speed = 0;
             }
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(DestroyEnemy());
-            explosion.gameObject.SetActive(true);
-            explosion.Play();
+            Destroy(gameObject);
+            _position = new Vector3(transform.position.x, transform.position.y, -38f);
+            Instantiate(explosion, _position, Quaternion.identity);
         }
 
         if (collision.gameObject.CompareTag("DetectColl"))
@@ -66,12 +69,6 @@ public class EnemyDestrroyer : MonoBehaviour
     void Dm(int dm)
     {
         enemyHp -= dm;
-    }
-    //Уничтожение через неск. сек. чтобы успела анимация проиграться
-    IEnumerator DestroyEnemy()
-    {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
     }
     //Если есть игрок на сцене то летит на него
     void Charge()
