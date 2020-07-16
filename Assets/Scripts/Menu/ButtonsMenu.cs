@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +15,6 @@ public class ButtonsMenu : MonoBehaviour
     public Button[] HangarButtons;
     public List<Button> InformButtons;
 
-    public List<Toggle> _toggle;
 
     public AudioSource _AudioSource;
 
@@ -39,6 +40,9 @@ public class ButtonsMenu : MonoBehaviour
 
     public List<Slider> sliders;
     private float muSvolume;
+    private float _effectVolume;
+
+    public ParticleSystem spark;
     public void Start()
     {
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
@@ -46,8 +50,11 @@ public class ButtonsMenu : MonoBehaviour
         _AudioSource = GetComponent<AudioSource>();
 
         muSvolume = _statistick.musickVolume;
+        _effectVolume = _statistick.effectVolume;
+        sliders[1].value = _effectVolume;
         sliders[0].value = muSvolume;
 
+        
     }
 
     public void Update()
@@ -70,8 +77,6 @@ public class ButtonsMenu : MonoBehaviour
 
         singIn.SetActive(true);
         _Buttons[6].gameObject.SetActive(true);
-        _toggle[0].gameObject.SetActive(true);
-        _toggle[1].gameObject.SetActive(true);
 
         foreach (Image image in optionImage)
         {
@@ -89,9 +94,11 @@ public class ButtonsMenu : MonoBehaviour
         _animator[0].SetBool("SettingsOpen", false);
         _animator[1].SetBool("SettingsOpen", false);
 
+        Menu();
+
         StartCoroutine(setActivFlase());
     }
-
+    //Делает не активным вкладку настройки
     IEnumerator setActivFlase()
     {
         yield return new WaitForSeconds(1.3f);
@@ -101,17 +108,14 @@ public class ButtonsMenu : MonoBehaviour
 
         singIn.SetActive(false);
 
-        _toggle[0].gameObject.SetActive(false);
-        _toggle[1].gameObject.SetActive(false);
 
         foreach (Image image in optionImage)
         {
             image.gameObject.SetActive(false);
         }
 
-        Menu();
     }
-
+    //Делает активным вкладку меню 
     private void Menu()
     {
         foreach (Button i in _Buttons)
@@ -144,7 +148,7 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
     }
-
+   //Выход из ангара 
     public void ResumArrowHangar()
     {
         _animator[2].SetBool("IsOpen", false);
@@ -155,7 +159,7 @@ public class ButtonsMenu : MonoBehaviour
 
         StartCoroutine(outHangar());
     }
-
+    //Делает вкладку ангара не активной 
     IEnumerator outHangar()
     {
         yield return new WaitForSeconds(1.5f);
@@ -181,7 +185,7 @@ public class ButtonsMenu : MonoBehaviour
 
         cHangar();
     }
-
+    //делает активной вкладку меню
     public void cHangar()
     {
         foreach (Button i in _Buttons)
@@ -214,7 +218,7 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
     }
-
+    //Делает не активной вкладку инфо и активной вкладку меню
     IEnumerator outInfo()
     {
         yield return new WaitForSeconds(2f);
@@ -253,7 +257,7 @@ public class ButtonsMenu : MonoBehaviour
             f.gameObject.SetActive(false);
         }
     }
-
+    //выходи из бестиария
     public void ResumArrow()
     {
         StartCoroutine(outInfo());
@@ -266,18 +270,6 @@ public class ButtonsMenu : MonoBehaviour
 
         Vector3 posShip = new Vector3(_playerShipM1.transform.position.x, _playerShipM1.transform.position.y, 93f);
         _playerShipM1.transform.position = posShip;
-    }
-
-    public void EffectToggle()
-    {
-        if (_toggle[1].isOn)
-        {
-            _statistick.effectToggle = true;
-        }
-        else
-        {
-            _statistick.effectToggle = false;
-        }
     }
 
     //Открывает ангар делает нужыне кнопки активными другие нет 
@@ -316,24 +308,22 @@ public class ButtonsMenu : MonoBehaviour
     //дмг +
     public void LvlUpDamage()
     {
-        if (_statistick.dmNum < 3)
+        if (_statistick.dm < 3)
         {
             _statistick.dm++;
-            _statistick.dmNum = _statistick.dm;
-            Debug.Log(_statistick.dmNum);
-            _Text[2].SetText("" + _statistick.dmNum);
+            _Text[2].SetText("" + _statistick.dm);
+            spark.Play();
         }
     }
 
     //хп +
     public void LvlUpHp()
     {
-        if (_statistick.HpNum < 9)
+        if (_statistick.Hp < 9)
         {
             _statistick.Hp++;
-            _statistick.HpNum = _statistick.Hp;
-            Debug.Log(_statistick.HpNum);
-            _Text[3].SetText("Hp  " + _statistick.HpNum);
+            _Text[3].SetText("Hp  " + _statistick.Hp);
+            spark.Play();
         }
     }
 
@@ -343,9 +333,8 @@ public class ButtonsMenu : MonoBehaviour
         if (_statistick.speed < 350)
         {
             _statistick.speed += 50;
-            _statistick.SpeedNum = _statistick.speed;
-            print(_statistick.SpeedNum);
-            _Text[4].SetText("Speed  " + _statistick.SpeedNum);
+            _Text[4].SetText("Speed  " + _statistick.speed);
+            spark.Play();
         }
     }
 
@@ -355,9 +344,8 @@ public class ButtonsMenu : MonoBehaviour
         if (_statistick.braking < 15)
         {
             _statistick.braking += 5;
-            _statistick.BrakingNum = _statistick.braking;
-            print(_statistick.BrakingNum);
-            _Text[5].SetText("Braking  " + _statistick.BrakingNum);
+            _Text[5].SetText("Braking  " + _statistick.braking);
+            spark.Play();
         }
     }
 
@@ -475,16 +463,34 @@ public class ButtonsMenu : MonoBehaviour
     public void CheckStatText()
     {
         _Text[2].SetText("" + _statistick.dm);
-        _Text[3].SetText("Hp  " + _statistick.HpNum);
-        _Text[4].SetText("Speed  " + _statistick.SpeedNum);
-        _Text[5].SetText("Braking  " + _statistick.BrakingNum);
+        _Text[3].SetText("Hp  " + _statistick.Hp);
+        _Text[4].SetText("Speed  " + _statistick.speed);
+        _Text[5].SetText("Braking  " + _statistick.braking);
     }
-
+    //Слайдер музыки
     public void MusicSlider()
     {
         muSvolume = sliders[0].value;
         _AudioSource.volume = muSvolume;
         _statistick.musickVolume = muSvolume;
+    }
+    //Слайдер эффектов
+    public void EffectSlider()
+    {
+        _effectVolume = sliders[1].value;
+        _statistick.effectVolume = _effectVolume;
+    }
+
+    public void Stick()
+    {
+        _statistick.stick = true;
+        print(_statistick.stick);
+    }
+
+    public void Arrow()
+    {
+        _statistick.stick = false;
+        print(_statistick.stick);
     }
 
 }

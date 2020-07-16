@@ -16,12 +16,11 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            audioS[0].volume = _statistick.musickVolume;
+        /*audioS[0].volume = _statistick.musickVolume;*/
 
-        if(_statistick.effectToggle == false)
-        {
-            audioS[1].gameObject.SetActive(false);
-            audioS[2].gameObject.SetActive(false);
-        }
+
+       /* audioS[1].volume = _statistick.effectVolume;
+        audioS[2].volume = _statistick.effectVolume;*/
+        
     }
 }

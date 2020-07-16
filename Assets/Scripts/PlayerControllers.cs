@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using TMPro;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,9 @@ public class PlayerControllers : MonoBehaviour
     private Statistick _statistick;
 
     private Buttons _buttons;
+
+    public Joystick joystick;
+    private float horizontalMove;
     void Start()
     {
         explosion = GameObject.Find("Explosion");
@@ -50,7 +54,7 @@ public class PlayerControllers : MonoBehaviour
 
         _statistick = GameObject.Find("Statistick").GetComponent<Statistick>();
 
-        playerHp = _statistick.HpNum;
+        playerHp = _statistick.Hp;
 
         _buttons = GameObject.Find("UIManager").GetComponent<Buttons>();
     }
@@ -61,13 +65,50 @@ public class PlayerControllers : MonoBehaviour
         InvisibleWall();
         Reload();
         MovePlayer();
+
+        if(_statistick.stick == true)
+        {
+            JoystickMove();
+        }
+        
+
         bulletVector = new Vector3(transform.position.x - 0.055f, transform.position.y + 1f, transform.position.z);
+
+    }
+    void JoystickMove()
+    {
+        Vector2 move = new Vector2(joystick.Horizontal, joystick.Vertical);
+        rb2d.AddForce(move * _statistick.speed * Time.fixedDeltaTime);
+        
+        if(joystick.Horizontal >= 0.2f || joystick.Vertical >= 0.2f)
+        {
+            fireEngine.SetActive(true);
+            fireAnim.SetBool("ArrowcClick", true);
+        }else if(joystick.Horizontal <= -0.2f || joystick.Vertical <= -0.2f)
+        {
+            fireEngine.SetActive(true);
+            fireAnim.SetBool("ArrowcClick", true);
+        }
+        else
+        {
+            fireAnim.SetBool("ArrowcClick", false);
+            fireEngine.SetActive(false);
+        }
+
+        if (joystick.Horizontal == 0f || joystick.Vertical == 0f)
+        {
+            rb2d.drag = _statistick.braking;
+        }
+        else
+        {
+            rb2d.drag = 0f;
+        }
     }
     //Движение игрока
     void MovePlayer()
     {
         Vector2 asd = new Vector2(speedX, speedY);
-        rb2d.AddForce(asd.normalized * _statistick.SpeedNum * Time.fixedDeltaTime);
+        rb2d.AddForce(asd.normalized * _statistick.speed * Time.fixedDeltaTime);
     }
     //Кнопка вверх
     public void UpArrow()
@@ -131,7 +172,7 @@ public class PlayerControllers : MonoBehaviour
         speedY = 0;
         fireAnim.SetBool("ArrowcClick", false);
         fireEngine.SetActive(false);
-        rb2d.drag = _statistick.BrakingNum;
+        rb2d.drag = _statistick.braking;
     }
 
     //Если умирает враг +1 очко
