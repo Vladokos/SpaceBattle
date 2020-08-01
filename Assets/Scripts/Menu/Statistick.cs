@@ -19,6 +19,7 @@ public class Statistick : MonoBehaviour
     public bool stick;
 
     static public string path;
+    private SaveData data = new SaveData();
     private void Awake()
     {
         int numStaticsPlayer = FindObjectsOfType<Statistick>().Length;
@@ -60,8 +61,6 @@ public class Statistick : MonoBehaviour
     {
         string key = "t1";
 
-        SaveData data = new SaveData();
-
         data.dm = this.dm;
         data.Hp = this.Hp;
         data.speed = this.speed;
@@ -72,5 +71,13 @@ public class Statistick : MonoBehaviour
         PlayerPrefs.Save();
 
         PlayerPrefs.SetString(key, value);
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            Save();
+        }
     }
 }

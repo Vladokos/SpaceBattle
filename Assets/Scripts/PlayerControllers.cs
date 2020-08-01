@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.UI;
 
 public class PlayerControllers : MonoBehaviour
@@ -20,6 +21,7 @@ public class PlayerControllers : MonoBehaviour
     private Vector3 bulletVector;
 
     public Animator fireAnim;
+    public Animator fireLight;
 
     public TextMeshProUGUI scoreT;
     public int score;
@@ -45,7 +47,11 @@ public class PlayerControllers : MonoBehaviour
     private Buttons _buttons;
 
     public Joystick joystick;
-    private float horizontalMove;
+
+    public Animator hurtLife;
+
+    public Light2D Pl;
+    public float lightUp = 1;
     void Start()
     {
         explosion = GameObject.Find("Explosion");
@@ -57,6 +63,10 @@ public class PlayerControllers : MonoBehaviour
         playerHp = _statistick.Hp;
 
         _buttons = GameObject.Find("UIManager").GetComponent<Buttons>();
+
+        hurtLife.SetInteger("HpP", playerHp);
+
+        Pl.intensity = lightUp;
     }
 
     void FixedUpdate()
@@ -66,14 +76,16 @@ public class PlayerControllers : MonoBehaviour
         Reload();
         MovePlayer();
 
-        if(_statistick.stick == true)
+        if(_statistick.stick == true || _buttons._controls == true)
         {
             JoystickMove();
         }
-        
 
         bulletVector = new Vector3(transform.position.x - 0.055f, transform.position.y + 1f, transform.position.z);
 
+        HpHurt();
+
+        
     }
     void JoystickMove()
     {
@@ -118,7 +130,11 @@ public class PlayerControllers : MonoBehaviour
             speedY = verInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);
+            fireLight.SetBool("FireOn", true);
             rb2d.drag = 0f;
+
+            Pl.gameObject.SetActive(true);
+            
         }
     }
     //Кнопка вниз
@@ -129,7 +145,10 @@ public class PlayerControllers : MonoBehaviour
             speedY = -verInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);
+            fireLight.SetBool("FireOn", true);
             rb2d.drag = 0f;
+
+            Pl.gameObject.SetActive(true);
         }
     }
     //Кнопка влево
@@ -140,7 +159,10 @@ public class PlayerControllers : MonoBehaviour
             speedX = -horInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);
+            fireLight.SetBool("FireOn", true);
             rb2d.drag = 0f;
+
+            Pl.gameObject.SetActive(true);
         }
     }
     //Кнопка впрво
@@ -151,7 +173,10 @@ public class PlayerControllers : MonoBehaviour
             speedX = horInput * Time.deltaTime;
             fireEngine.SetActive(true);
             fireAnim.SetBool("ArrowcClick", true);
+            fireLight.SetBool("FireOn", true);
             rb2d.drag = 0f;
+
+            Pl.gameObject.SetActive(true);
         }
     }
     // кнопка выстрела
@@ -163,6 +188,8 @@ public class PlayerControllers : MonoBehaviour
             timeShoot = coolDownd;
             Instantiate(bullet, bulletVector, transform.rotation);
             shot.Play();
+
+            Pl.gameObject.SetActive(true);
         }
     }
     //Во время поднимание кнопки игрок останав. и анимация
@@ -172,7 +199,10 @@ public class PlayerControllers : MonoBehaviour
         speedY = 0;
         fireAnim.SetBool("ArrowcClick", false);
         fireEngine.SetActive(false);
+        fireLight.SetBool("FireOn", false);
         rb2d.drag = _statistick.braking;
+
+        Pl.gameObject.SetActive(false);
     }
 
     //Если умирает враг +1 очко
@@ -207,6 +237,8 @@ public class PlayerControllers : MonoBehaviour
             boom.Play();
             _buttons.PauseButton();
             _buttons._Buttons[0].gameObject.SetActive(false);
+
+            hurtLife.SetInteger("HpP", 0);
         }
     }
     //Снижение здоровья
@@ -241,5 +273,9 @@ public class PlayerControllers : MonoBehaviour
         {
             timeShoot -= Time.deltaTime;
         }
+    }
+    private void HpHurt()
+    {
+      hurtLife.SetInteger("HpP",playerHp);
     }
 }

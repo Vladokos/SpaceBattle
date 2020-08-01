@@ -6,7 +6,7 @@ public class EnemyDestrroyer : MonoBehaviour
     public int hp;
     public int enemyHp;
 
-    private float speed = 5f;
+    private float speed = 10f;
 
     public BoxCollider2D bC;
     public Rigidbody2D rB2D;

@@ -20,6 +20,7 @@ public class EnemyLife : MonoBehaviour
     public float timeShoot, coolDownd;
 
     private GameObject explosion;
+    public Animator explosionLight;
 
     private Vector3 _position;
 
@@ -34,10 +35,6 @@ public class EnemyLife : MonoBehaviour
     Vector2 forward;
 
     float speed = 7f;
-
-    /*private float waitTime;
-    public float startWaitTime;*/
-    // Start is called before the first frame update
     void Start()
     {
         /*waitTime = startWaitTime;*/
@@ -55,6 +52,7 @@ public class EnemyLife : MonoBehaviour
         
 
         explosion = GameObject.Find("Explosion");
+        explosionLight = GameObject.Find("ExplLight2d").GetComponent<Animator>();
 
         randomPosX = Random.Range(6f,-6f);
         randomPosY = Random.Range(-2f, 15f);
@@ -118,18 +116,6 @@ public class EnemyLife : MonoBehaviour
     void movePoint()
     {
         transform.position = Vector2.MoveTowards(transform.position,forward,Time.fixedDeltaTime * speed);
-
-       /* if(Vector2.Distance(transform.position,movePos[randomPos].position)<0.2f)
-        {
-            if (waitTime <= 0)
-            {
-                randomPos = Random.Range(0, movePos.Length);
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                waitTime -= Time.fixedDeltaTime;
-            }
-        }*/
     }
+   
 }

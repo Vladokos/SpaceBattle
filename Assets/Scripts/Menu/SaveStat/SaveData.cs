@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SaveData 
 {
-
     public int dm = 1;
     public int Hp = 3;
     public float speed = 150f;

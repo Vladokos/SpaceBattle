@@ -19,6 +19,9 @@ public class Buttons : MonoBehaviour
     public List<Slider> sliders;
     private float musVolume;
     private float effectsVolume;
+
+    public List<GameObject> controls;
+    public bool _controls;
     void Start()
     {
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
@@ -112,5 +115,16 @@ public class Buttons : MonoBehaviour
             GameObject.Find("Fixed Joystick").gameObject.SetActive(false);
         }
     }
-
+    public void Stick()
+    {
+        controls[0].gameObject.SetActive(false);
+        controls[1].gameObject.SetActive(true);
+        _controls = true;
+    }
+    public void Arrow()
+    {
+        controls[0].gameObject.SetActive(true);
+        controls[1].gameObject.SetActive(false);
+        _controls = false;
+    }
 }

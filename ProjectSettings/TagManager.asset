@@ -4,14 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LaserBullet
-  - UP
-  - Enemy
-  - EnemyBullet
-  - DetectColl
-  - Destroyer
-  - BackGround
   - MusicManager
+  - DetectColl
+  - BackGround
+  - LaserBullet
+  - Enemy
+  - Destroyer
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -48,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 343134541
+    locked: 0
+  - name: GameLayer
+    uniqueID: 3978586647
     locked: 0

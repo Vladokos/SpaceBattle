@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -20,10 +21,18 @@ public class SpawnManager : MonoBehaviour
         InvokeRepeating("SpawnShip", 3f, 3f);
         _playerControllers = GameObject.Find("Player").GetComponent<PlayerControllers>();
     }
+    private void Update()
+    {
+        /*if (_playerControllers.score >= 10)
+        {
+            Destroy(GameObject.FindWithTag("Enemy"));
+            print("asd");
+        }*/
+    }
     //Спавн рандомных врагов  каждые 3 секунды в рандомном полезрения камеры
     void SpawnShip()
     {
-        if (gameStart = true && _playerControllers._gameOver == false)
+        if (gameStart = true && _playerControllers._gameOver == false && _playerControllers.score < 10 )
         {
             int randomShip = Random.Range(0, enemesPref.Count);
             Vector2 randomSpawn = new Vector2(Random.Range(-spawnPosX, spawnPosX), Random.Range(spawnPosY, spawnPosY + 7f));
